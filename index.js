@@ -31,7 +31,7 @@ app.listen(
     () => console.log(`Sirviendo en http://localhost:${PORT}`)
 );
 
-app.get('/students', (req, res) => {
+app.get('/students/:code', (req, res) => {
     res.status(200).send({
         code: 2183074,
         name: 'Gianfranco',
