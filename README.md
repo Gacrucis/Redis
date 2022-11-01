@@ -11,6 +11,7 @@ node .
 
 JSON Body example
 
+```
 {
     "code" : 1,
     "name" : "ed",
@@ -18,5 +19,6 @@ JSON Body example
     "email" : "ed@ed.ed",
     "level" : 4
 }
+```
 
-### GET http://localhost:8080/students/<code>
+### GET http://localhost:8080/students/:code
