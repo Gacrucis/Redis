@@ -32,12 +32,24 @@ app.listen(
 );
 
 app.get('/students/:code', (req, res) => {
-    res.status(200).send({
-        code: 2183074,
-        name: 'Gianfranco',
-        program: 'Sistemas',
-        level: 9
-    })
+
+    let code = req.params.code
+
+    const getClient = async (student_code) => {
+        const a = await client.hGetAll(toString(student_code));
+        console.log(a);
+        return a;
+    };
+
+    let student = getClient(code);
+
+    res.send({
+        code : student.code,
+        name : student.name,
+        program : student.program,
+        email : student.email,
+        level : student.level
+    });
 });
 
 app.post('/addstudent', (req, res) => {
