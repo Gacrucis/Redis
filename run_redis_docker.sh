@@ -1,0 +1,1 @@
+docker run --name redis-s3 -p 7000:6379 -d redis
