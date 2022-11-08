@@ -31,28 +31,25 @@ app.listen(
     () => console.log(`Sirviendo en http://localhost:${PORT}`)
 );
 
-app.get('/students/:code', (req, res) => {
+app.get('/students/:id', (req, res) => {
 
-    let code = req.params.code
+    let id = req.params.id
 
-    const getClient = async (student_code) => {
-        const a = await client.hGetAll(toString(student_code));
+    const getClient = async (student_id) => {
+        const a = await client.hGetAll(toString(student_id));
         console.log(a);
         return a;
     };
 
-    let student = getClient(code);
+    let student = getClient(id);
 
     res.send({
-        code : student.code,
-        name : student.name,
-        program : student.program,
-        email : student.email,
-        level : student.level
+        code: `Sirviendo`
     });
 });
 
-app.post('/addstudent', (req, res) => {
+app.post('/addstudent/:id', (req, res) => {
+    const { id } = req.body;
     const { code } = req.body;
     const { name } = req.body;
     const { program } = req.body;
