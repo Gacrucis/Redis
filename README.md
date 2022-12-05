@@ -7,7 +7,7 @@ node .
 
 ## Endpoints
 
-### POST http://localhost:8080/addstudent
+### POST http://localhost:8080/addstudent/:id
 
 JSON Body example
 

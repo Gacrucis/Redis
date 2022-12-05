@@ -3,8 +3,10 @@
 const express = require('express');
 const redis = require('redis');
 
-const redis_host = '127.0.0.1'
-const redis_port = 7000
+// const redis_host = '127.0.0.1'
+const redis_host = 'redis'
+// const redis_port = 7000
+const redis_port = 6379
 
 const client = redis.createClient({
     socket: {
@@ -37,15 +39,13 @@ app.get('/students/:id', (req, res) => {
 
     const getClient = async (student_id) => {
         const a = await client.hGetAll(toString(student_id));
-        console.log(a);
         return a;
     };
 
-    let student = getClient(id);
+    getClient(id)
+        .then(value => res.send(value))
+        .catch(err => res.send({msg: 'I did an oppsie', error: err}))
 
-    res.send({
-        code: `Sirviendo`
-    });
 });
 
 app.post('/addstudent/:id', (req, res) => {
@@ -56,6 +56,8 @@ app.post('/addstudent/:id', (req, res) => {
     const { email } = req.body;
     const { level } = req.body;
 
+    console.log('POST RECIBIDO')
+
     if (!code) {
         res.status(418).send({ message: 'Complete la información!'})
         return
@@ -65,7 +67,6 @@ app.post('/addstudent/:id', (req, res) => {
 
     const printClient = async () => {
         const a = await client.hGetAll(toString(code));
-        console.log(a);
     };
 
     printClient();
